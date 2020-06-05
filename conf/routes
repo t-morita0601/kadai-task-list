@@ -6,20 +6,20 @@
 # An example controller showing a sample home page
 GET     /                           controllers.Default.redirect(to = "/tasks")
 
-# �^�X�N�ꗗ��ʂ̕\��
+# タスク一覧画面の表示
 GET     /tasks                   controllers.GetTasksController.index
-# �^�X�N�ڍ׉�ʂ̕\��
+# タスク詳細画面の表示
 GET     /tasks/:id/get           controllers.GetTaskController.index(id: Long)
-# �^�X�N�쐬��ʂ̕\��
+# タスク作成画面の表示
 GET     /tasks/create            controllers.CreateTaskController.index
-# �^�X�N�ҏW��ʂ̕\��
+# タスク編集画面の表示
 GET     /tasks/:id/update        controllers.UpdateTaskController.index(id: Long)
 
-# �^�X�N�̍쐬
+# タスクの作成
 POST    /tasks/create            controllers.CreateTaskController.create
-# �^�X�N�̍X�V
+# タスクの更新
 POST    /tasks/update            controllers.UpdateTaskController.update
-# �^�X�N�̍폜
+# タスクの削除
 POST    /tasks/:id/delete        controllers.DeleteTaskController.delete(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path

@@ -7,7 +7,7 @@ import forms.TaskForm
 import models.Task
 import play.api.i18n.{ I18nSupport, Messages }
 import play.api.mvc._
-import scalikejdbc._, jsr310._ // 手動でインポートしてください。
+import scalikejdbc._, jsr310._
 
 @Singleton
 class UpdateTaskController @Inject()(components: ControllerComponents)
@@ -17,7 +17,7 @@ class UpdateTaskController @Inject()(components: ControllerComponents)
 
   def index(taskId: Long): Action[AnyContent] = Action { implicit request =>
     val result     = Task.findById(taskId).get
-    val filledForm = form.fill(TaskForm(result.id, result.content))
+    val filledForm = form.fill(TaskForm(result.id, result.status, result.content))
     Ok(views.html.edit(filledForm))
   }
 
@@ -30,6 +30,7 @@ class UpdateTaskController @Inject()(components: ControllerComponents)
           val result = Task
             .updateById(model.id.get)
             .withAttributes(
+              'status    -> model.status,
               'content     -> model.content,
               'updateAt -> ZonedDateTime.now()
             )
